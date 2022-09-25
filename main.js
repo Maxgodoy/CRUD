@@ -81,6 +81,13 @@ function readOne(id){
     edad.value = cliente.age;
 }
 
+function eliminarCliente(id){
+    let clientes = read("clientes");
+    let filtrado = clientes.filter(cliente => cliente.id != id);
+    save("clientes", filtrado);
+    readAll();
+}
+
 readAll();
 
 let btnAdd = document.querySelector("#btnAgregar");
@@ -92,4 +99,11 @@ editList.forEach(element =>{
     element.addEventListener('click', (e) =>{
         readOne(element.id.match(/(\d+)/)[0]);
     })
-})
+});
+
+let eliminarList = document.querySelectorAll(".btn-outline-danger")
+eliminarList.forEach(element =>{
+    element.addEventListener('click', (e) =>{
+        eliminarCliente(element.id.match(/(\d+)/)[0]);
+    })
+});
